@@ -1,0 +1,9 @@
+JAVA=/usr/bin/java # Path to Java
+NO_START=<% if @service_startup -%>0<% else -%>1<% end %>
+JETTY_HOST=<%= @listen %>
+JETTY_ARGS="<%= @jetty_args %>"
+JETTY_USER=<%= @user %>
+JETTY_HOME=<%= @jetty_home %>
+JETTY_BASE=<%= @jetty_base %>
+JETTY_LOGS=<%= @logdir %>
+JETTY_PID=<%= @pidfile %>
