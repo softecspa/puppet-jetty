@@ -8,6 +8,8 @@ define jetty::version::install (
   $user_gid             = undef,
 ) {
 
+  require s3cmd
+
   if ($package_s3_bucket == '') and ($package_download_url == '') {
     fail('please specify package_s3_bucket or download_url')
   }

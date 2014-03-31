@@ -41,6 +41,12 @@ define jetty::version (
     default => $pidfile,
   }
 
+  if !defined(Class['java']) {
+    class {'java':
+      java_package  => 'openjdk-7-jre'
+    }
+  }
+
   jetty::version::install {$name:
     version               => $real_version,
     package_s3_bucket     => $package_s3_bucket,

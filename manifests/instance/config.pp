@@ -44,7 +44,8 @@ define jetty::instance::config (
     owner   => $user,
     group   => $user,
     mode    => '0644',
-    content => template('jetty/http.ini.erb')
+    content => template('jetty/http.ini.erb'),
+    notify  => Service["jetty-${instance_name}"]
   }
 
   file {"${jetty_base}/start.ini":
@@ -52,6 +53,18 @@ define jetty::instance::config (
     owner   => $user,
     group   => $user,
     mode    => '0644',
-    content => template('jetty/start.ini.erb')
+    content => template('jetty/start.ini.erb'),
+    notify  => Service["jetty-${instance_name}"]
   }
+
+  file {"${jetty_base}/resources/log4j.properties":
+    ensure  => present,
+    owner   => $user,
+    group   => $user,
+    mode    => '0644',
+    content => template('jetty/log4j.properties.erb'),
+    notify  => Service["jetty-${instance_name}"]
+  }
+
+
 }
