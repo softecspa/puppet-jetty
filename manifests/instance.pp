@@ -15,6 +15,8 @@ define jetty::instance (
   $logdir               = '',
   $pidfile              = '',
   $port,
+  $logrotate_interval   = 'daily',
+  $logrotate_rotation   = '30',
 ) {
 
   $in = $instance_name?{
@@ -74,8 +76,16 @@ define jetty::instance (
     service_startup => $service_startup,
   }
 
+  jetty::instance::logrotate {$in:
+    jetty_base  => $real_jetty_base,
+    jetty_user  => $user,
+    interval    => $logrotate_interval,
+    rotation    => $logrotate_rotation
+  }
+
   Jetty::Instance::Install[$name] ->
   Jetty::Instance::Config[$name] ->
-  Jetty::Instance::Service[$name]
+  Jetty::Instance::Service[$name] ->
+  Jetty::Instance::Logrotate[$name]
 
 }
