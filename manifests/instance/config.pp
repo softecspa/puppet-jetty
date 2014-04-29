@@ -66,5 +66,10 @@ define jetty::instance::config (
     notify  => Service["jetty-${instance_name}"]
   }
 
-
+  if $java_options!= '' {
+    jetty::instance::java_options{"options_${instance_name}":
+      instance_name => $instance_name,
+      option        => $java_options,
+    }
+  }
 }
