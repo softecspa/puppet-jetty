@@ -1,3 +1,63 @@
+# Define: jetty::instance
+#
+# This define creates a jetty instance
+#
+# Parameters:
+#
+# [*instance_name*]
+#   name of jetty instance. Instance will be called jetty-$instance_name. If not present <name> will be used
+#
+# [*version*]
+#   Version of jetty to install. Mandatory
+#
+# [*package_s3_bucket*]
+#   Name of s3 bucket where jetty install is stored
+#
+# [*package_download_url*]
+#   Url where jetty can be downloaded
+#
+# [*root*]
+#   Root path where jetty will be installed. Default: /opt
+#
+# [*user*]
+#   User for jetty process. Default: jetty
+#
+# [*user_uid*]
+#   Uid for jetty user. Default: unset
+#
+# [*user_gid*]
+#   Gid for jetty user. Default: unset
+#
+# [*service_startup*]
+#   True is instance must be running. Default: true
+#
+# [*jetty_args*]
+#   Variable JETTY_ARGS used in /etc/default/jetty-${instance_name}
+#
+# [*java_options*]
+#   JAVA_OPTIONS to use in jetty instance
+#
+# [*jetty_base*]
+#   JETTY_BASE for jetty instance. Default: ${root}/jetty-${instance_name}
+#
+# [*listen*]
+#   listen_address of jetty instance. Default: 0.0.0.0
+#
+# [*logdir*]
+#   directory where jetty logs are stored. Default: /var/log/jetty/${instance_name}
+#
+# [*pidfile*]
+#   path of pid file. Default /var/run/jetty-${instance_name}.pid
+#
+# [*port*]
+#   listen port. Mandatory
+#
+# [*logrotate_interval*]
+#   interval for logrotate. Default: daily
+#
+# [*logrotate_rotation*]
+#   Data retention for logrotate. Default: 30
+#
 define jetty::instance (
   $instance_name        = '',
   $version,
